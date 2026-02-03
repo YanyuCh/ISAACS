@@ -66,7 +66,7 @@ def get_mlp_input(
       action = action.to(device)
     assert state.dim() == action.dim()
   if append is not None:
-    if isinstance(action, np.ndarray):
+    if isinstance(append, np.ndarray):
       append = torch.FloatTensor(append).to(device)
     else:
       append = append.to(device)

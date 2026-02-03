@@ -52,9 +52,16 @@ class Batch(object):
             np.asarray([info[key] for info in batch.info])
         ).to(device)
     if 'append' in self.info:
+      self.info['non_final_append_nxt'] = th.tensor(
+          np.stack([info['append_nxt'] for info in batch.info]),
+          dtype = th.float32,
+          device = device
+      )[self.non_final_mask]
+      '''
       self.info['non_final_append_nxt'] = (
           batch.info['append_nxt'][self.non_final_mask]
       )
+      '''
 
 
 class ReplayMemory(object):
